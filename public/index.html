@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>To-Do List</title>
+</head>
+<body>
+  <h1>TO-DO LIST</h1>
+  <div id="task-box">
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="Add a task" required>
+      <button type="submit">Add Task</button>
+    </form>
+    <ul id="task-list"></ul>
+  </div>
+  <div id="button-container">
+    <button id="logout-btn">Logout</button>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    // Logout function
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      // Clear the token from local storage
+      localStorage.removeItem('token');
+      // Redirect to the login page
+      window.location.href = '/login';
+    });
+
+    // Check if token is present, fetch tasks directly
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetchTasks();
+    } else {
+      // Token is not present, redirect to the login page
+      window.location.href = '/login';
+    }
+  </script>
+</body>
+</html>
